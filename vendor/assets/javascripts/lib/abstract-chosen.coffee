@@ -87,7 +87,14 @@ class AbstractChosen
     option_el.className = classes.join(" ")
     option_el.style.cssText = option.style
     option_el.setAttribute("data-option-array-index", option.array_index)
+
     option_el.innerHTML = option.search_text
+
+    unless option.description.blank() 
+      desc_el = document.createElement("div")
+      desc_el.className = "description"
+      desc_el.innerHTML = option.description
+      option_el.innerHTML += desc_el.outerHTML
 
     this.outerHTML(option_el)
 

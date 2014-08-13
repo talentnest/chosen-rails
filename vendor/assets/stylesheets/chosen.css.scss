@@ -148,6 +148,8 @@ $chosen-sprite-retina: image-url('chosen-sprite@2x.png') !default;
     list-style: none;
     line-height: 15px;
     -webkit-touch-callout: none;
+    white-space: nowrap;
+
     &.active-result {
       display: list-item;
       cursor: pointer;
@@ -179,6 +181,11 @@ $chosen-sprite-retina: image-url('chosen-sprite@2x.png') !default;
       font-style: normal;
       text-decoration: underline;
     }
+    .description {
+      font-style: italic;
+      font-size: 85%;
+    }
+
   }
 }
 /* @end */
