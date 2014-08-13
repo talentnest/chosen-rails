@@ -90,6 +90,10 @@ class AbstractChosen
 
     option_el.innerHTML = option.search_text
 
+    if parseInt(option.depth) > 0
+      # Hacky hardcoding of padding values should be fixed
+      option_el.style.paddingLeft = 6 + parseInt(option.depth) * 15 + "px"
+
     if option.description && !option.description.blank()
       desc_el = document.createElement("div")
       desc_el.className = "description"

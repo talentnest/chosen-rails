@@ -37,6 +37,7 @@ class SelectParser
           classes: option.className
           style: option.style.cssText
           description: option.readAttribute('data-description')
+          depth: option.readAttribute('data-depth')
       else
         @parsed.push
           array_index: @parsed.length
