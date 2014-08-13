@@ -90,7 +90,7 @@ class AbstractChosen
 
     option_el.innerHTML = option.search_text
 
-    unless option.description.blank() 
+    if option.description && !option.description.blank()
       desc_el = document.createElement("div")
       desc_el.className = "description"
       desc_el.innerHTML = option.description
