@@ -338,6 +338,8 @@ class @Chosen extends AbstractChosen
       item = @results_data[ high.getAttribute("data-option-array-index") ]
       item.selected = true
 
+      @choices.push item.value
+
       @form_field.options[item.options_index].selected = true
       @selected_option_count = null
 
@@ -369,6 +371,9 @@ class @Chosen extends AbstractChosen
 
     if not @form_field.options[result_data.options_index].disabled
       result_data.selected = false
+
+      @choices = @choices.reject (choice) ->
+        choice == result_data.value
 
       @form_field.options[result_data.options_index].selected = false
       @selected_option_count = null
