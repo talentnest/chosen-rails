@@ -288,6 +288,7 @@ class @Chosen extends AbstractChosen
       close_link.observe "click", (evt) => this.choice_destroy_link_click(evt)
       choice.insert close_link
 
+    @choices.push item.value
     @search_container.insert { before: choice }
 
   choice_destroy_link_click: (evt) ->
