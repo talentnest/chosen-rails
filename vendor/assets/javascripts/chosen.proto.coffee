@@ -349,7 +349,11 @@ class @Chosen extends AbstractChosen
       else
         this.single_set_selected_text(item.text)
 
-      this.results_hide() unless (evt.metaKey or evt.ctrlKey) and @is_multiple
+      stroke = evt.which ? evt.keyCode
+      if (evt.metaKey or evt.ctrlKey or stroke == 9) and @is_multiple
+        Event.stop(evt)
+      else
+        this.results_hide()
 
       @search_field.value = ""
 
@@ -400,8 +404,8 @@ class @Chosen extends AbstractChosen
     if not @is_multiple
       do_high = @search_results.down(".result-selected.active-result")
 
-    if not do_high?
-      do_high = @search_results.down(".active-result")
+#    if not do_high?
+#      do_high = @search_results.down(".active-result")
 
     this.result_do_highlight do_high if do_high?
 
@@ -415,8 +419,12 @@ class @Chosen extends AbstractChosen
 
 
   keydown_arrow: ->
-    if @results_showing and @result_highlight
-      next_sib = @result_highlight.next('.active-result')
+    if @results_showing
+      if not @result_highlight?
+        next_sib = @search_results.down('.active-result')
+      else
+        next_sib = @result_highlight.next('.active-result')
+
       this.result_do_highlight next_sib if next_sib
     else
       this.results_show()
@@ -434,6 +442,8 @@ class @Chosen extends AbstractChosen
       else
         this.results_hide() if this.choices_count() > 0
         this.result_clear_highlight()
+    else if @is_multiple
+      this.results_hide() if this.choices_count() > 0
 
   keydown_backstroke: ->
     if @pending_backstroke
@@ -460,21 +470,21 @@ class @Chosen extends AbstractChosen
     this.clear_backstroke() if stroke != 8 and this.pending_backstroke
 
     switch stroke
-      when 8
+      when Event.KEY_BACKSPACE
         @backstroke_length = this.search_field.value.length
         break
-      when 9
-        this.result_select(evt) if this.results_showing and not @is_multiple
+      when Event.KEY_TAB
+        this.result_select(evt) if this.results_showing
         @mouse_on_container = false
         break
-      when 13
+      when Event.KEY_RETURN
         evt.preventDefault()
         break
-      when 38
+      when Event.KEY_UP
         evt.preventDefault()
         this.keyup_arrow()
         break
-      when 40
+      when Event.KEY_DOWN
         evt.preventDefault()
         this.keydown_arrow()
         break
