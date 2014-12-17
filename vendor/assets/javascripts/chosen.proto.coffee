@@ -404,8 +404,8 @@ class @Chosen extends AbstractChosen
     if not @is_multiple
       do_high = @search_results.down(".result-selected.active-result")
 
-#    if not do_high?
-#      do_high = @search_results.down(".active-result")
+    if not do_high? and @search_results.children.length == 1
+      do_high = @search_results.down(".active-result")
 
     this.result_do_highlight do_high if do_high?
 
