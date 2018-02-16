@@ -38,6 +38,7 @@ class SelectParser
           style: option.style.cssText
           description: option.readAttribute('data-description')
           depth: option.readAttribute('data-depth')
+          keywords: option.readAttribute('data-keywords')
       else
         @parsed.push
           array_index: @parsed.length
